@@ -955,6 +955,8 @@ class MolecularDynamics(BaseCalculation):
                 / units.GPa
             )
         except (ValueError, NotImplementedError):
+            # ASE's Plumed wrapper does not implement get_stress(). 
+            # This does not affect the simulation, only statistics logging
             volume = 0.0
             pressure = 0.0
             pressure_tensor = np.zeros(6)
